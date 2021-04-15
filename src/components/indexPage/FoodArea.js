@@ -1,16 +1,24 @@
 import axios from 'axios';
 import '../../App.css';
+import React, {useEffect, useState} from 'react';
 
-const [menuData, setMenuData] = useState()
 
-useEffect(() => {
-    axios.get('https://online-restoran.herokuapp.com/api/foods')
-        .then((result) => {
-            setMenuData(result.data)
-        })
-})
 
 function FoodArea() {
+
+    const [menuData, setMenuData] = useState([])
+
+    useEffect(() => {
+        axios
+            .get("https://online-restoran.herokuapp.com/api/foods")
+            .then(res=>{setMenuData(res.data)})
+            .catch(err=>{
+                console.log(err)
+            })
+    }, [])
+
+    console.log(menuData)
+
   return (
     <section className="food-area section-padding">
         <div className="container">
@@ -23,20 +31,22 @@ function FoodArea() {
                 </div>
             </div>
             <div className="row">
-                <div className="col-md-4 col-sm-6">
-                    <div className="single-food">
-                        <div className="food-img">
-                            <img src="assets/images/food1.jpg" className="img-fluid" alt=""/>
-                        </div>
-                        <div className="food-content">
-                            <div className="d-flex justify-content-between">
-                                <h5>Mexican Eggrolls</h5>
-                                <span className="style-change">$14.50</span>
+                {menuData.map(item => (
+                    <div className="col-md-4 col-sm-6">
+                        <div className="single-food">
+                            <div className="food-img">
+                                
                             </div>
-                            <p className="pt-3">Face together given moveth divided form Of Seasons that fruitful.</p>
+                            <div className="food-content">
+                                <div className="d-flex justify-content-between">
+                                    <h5>{item.name}</h5>
+                                    <span className="style-change">{item.price}</span>
+                                </div>
+                                <p className="pt-3">{item.description}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                ))}
             </div>
         </div>
     </section>

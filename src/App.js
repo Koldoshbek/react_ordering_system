@@ -4,6 +4,8 @@ import 'animate.css/animate.css';
 import Header from './components/header/Header';
 import Banner from './components/indexPage/Banner'
 import WelcomeArea from './components/indexPage/WelcomeArea'
+import FoodArea from './components/indexPage/FoodArea'
+import Customer from './components/indexPage/Customer'
 
 
 function App() {
@@ -12,6 +14,8 @@ function App() {
       <Header/>
       <Banner/>
       <WelcomeArea/>
+      <FoodArea/>
+      <Customer/>
     </div>
   );
 }
